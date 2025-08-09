@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { PRODUCTS } from "@/data/products";
 import { getProductBySlug } from "@/lib/server/products";
+import Image from "next/image";
 
 type Params = { slug: string };
 
@@ -23,13 +24,23 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
     <section className="mx-auto max-w-4xl px-6 py-12">
       <div className="grid gap-6 md:grid-cols-2">
         <div className="aspect-[4/3] overflow-hidden rounded-xl border">
-          <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={800}
+            height={600}
+            className="h-full w-full object-cover"
+          />
         </div>
         <div>
           <h1 className="text-3xl font-bold">{product.name}</h1>
           <p className="mt-2 opacity-80">{product.description}</p>
           <p className="mt-4 text-2xl font-semibold">
-            {new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(product.price)}
+            {new Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR",
+              maximumFractionDigits: 0,
+            }).format(product.price)}
           </p>
           <p className="mt-2 text-sm opacity-70">⭐ {product.rating}</p>
         </div>

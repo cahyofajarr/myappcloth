@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import Card from "@/components/ui/Card";
 import type { Product } from "@/lib/types";
+import Image from "next/image";
 
 type Props = { products: Product[] };
 
@@ -13,7 +14,7 @@ export default function ProductsSearchClient({ products }: Props) {
 
   const filtered = React.useMemo(() => {
     const qx = q.trim().toLowerCase();
-    return products.filter(p => {
+    return products.filter((p) => {
       const okCat = cat === "all" || p.category === cat;
       const okText =
         !qx ||
@@ -53,9 +54,12 @@ export default function ProductsSearchClient({ products }: Props) {
             <Link href={`/products/${p.slug}`} className="block">
               <Card title={p.name} description={p.description}>
                 <div className="aspect-[4/3] overflow-hidden rounded-xl mb-3">
-                  <img
+                  <Image
                     src={p.image}
                     alt={p.name}
+                    width={800}
+                    height={600}
+                    sizes="(min-width:1024px) 33vw, 50vw"
                     className="h-full w-full object-cover"
                   />
                 </div>

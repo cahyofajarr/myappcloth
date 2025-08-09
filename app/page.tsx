@@ -2,6 +2,7 @@
 
 import Button from "@/components/ui/Button";
 import { PRODUCTS } from "@/data/products";
+import Image from "next/image";
 
 export default function Home() {
   const top = PRODUCTS.slice(0, 3);
@@ -22,7 +23,13 @@ export default function Home() {
           {top.map((p) => (
             <li key={p.id} className="rounded-2xl border p-5 shadow-sm bg-white/80">
               <div className="aspect-[4/3] overflow-hidden rounded-xl mb-3">
-                <img src={p.image} alt={p.name} className="h-full w-full object-cover" />
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  width={800}          {/* wajib: width/height */}
+                  height={600}
+                  className="h-full w-full object-cover"
+                />
               </div>
               <div className="flex items-center justify-between">
                 <span className="font-medium">
